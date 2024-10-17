@@ -28,9 +28,9 @@ jobs:
   
       - name: Set up database
         run: |
-          sudo systemctl start mysql
-          sudo systemctl status mysql
-          mysql -h 127.0.0.1 --port 3306 -u root -p -e 'CREATE DATABASE IF NOT EXISTS blog;'
+          sudo systemctl stop mysql
+          sudo mysqld_safe --skip-grant-tables &
+          mysql -u root
   
       - name: Run migrations
         run: php artisan migrate
