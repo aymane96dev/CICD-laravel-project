@@ -28,6 +28,7 @@ jobs:
   
       - name: Set up database
         run: |
+          sudo systemctl start mysql
           sudo systemctl status mysql
           sudo mysql -e 'CREATE DATABASE blog;'
   
