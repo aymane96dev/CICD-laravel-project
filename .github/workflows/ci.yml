@@ -28,7 +28,7 @@ jobs:
   
       - name: Set up database
         run: |
-          sudo apt-get install mysql-server
+          sudo systemctl status mysql
           sudo mysql -e 'CREATE DATABASE blog;'
   
       - name: Run migrations
