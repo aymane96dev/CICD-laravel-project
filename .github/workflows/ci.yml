@@ -20,6 +20,9 @@ jobs:
       - name: Dependency install
         run: composer install --prefer-dist --no-interaction --no-scripts --no-progress
 
+      - name: config env file
+        run: cp .env.example .env
+        
       - name: Generate application key
         run: php artisan key:generate
   
