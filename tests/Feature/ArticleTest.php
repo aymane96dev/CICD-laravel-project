@@ -15,21 +15,17 @@ class ArticleTest extends TestCase
     public function test_article_creation()
     {
         $response = $this->post('/api/article', [
-            'title' => 'AI music suno',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                       Mauris maximus suscipit turpis vitae dictum. Cras ac mauris
-                       et felis molestie pretium nec rhoncus libero.',
-            'category_id' => 5
+            'title' => 'The new economy model in 2024',
+            'body' => 'Has no body',
+            'category_id' => 2
                     
         ]);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('articles', [
-            'title' => 'AI music suno',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                       Mauris maximus suscipit turpis vitae dictum. Cras ac mauris
-                       et felis molestie pretium nec rhoncus libero.',
-            'category_id' => 5
+            'title' => 'The new economy model in 2024',
+            'body' => 'Has no body',
+            'category_id' => 2
                     
         ]);
     }
@@ -54,9 +50,9 @@ class ArticleTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson([
-            'title' => 'mbappe is a raper',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus suscipit turpis vitae dictum. Cras ac mauris et felis molestie pretium nec rhoncus libero.',
-            'category_id' => 1
+            'title' => 'The new economy model in 2024',
+            'body' => 'Has no body',
+            'category_id' => 2
         ]);
     }
 
@@ -66,20 +62,16 @@ class ArticleTest extends TestCase
     public function test_article_update()
     {
         $response = $this->put('/api/article/1', [
-            'title' => 'Mbappe signed Real Madrid',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                       Mauris maximus suscipit turpis vitae dictum. Cras ac mauris
-                       et felis molestie pretium nec rhoncus libero.',
-            'category_id' => 1             
+            'title' => 'Kylian Mbappe signed Real Madrid in 2024',
+            'body' => 'Has no body',
+            'category_id' => 2            
         ]);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('articles', [
-            'title' => 'Mbappe signed Real Madrid',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                       Mauris maximus suscipit turpis vitae dictum. Cras ac mauris
-                       et felis molestie pretium nec rhoncus libero.',
-            'category_id' => 1             
+            'title' => 'Kylian Mbappe signed Real Madrid in 2024',
+            'body' => 'Has no body',
+            'category_id' => 2           
         ]);
     }
 
@@ -88,9 +80,9 @@ class ArticleTest extends TestCase
      */
     public function test_article_delete()
     {
-        $response = $this->delete('/api/article/7');
+        $response = $this->delete('/api/article/1');
 
         $response->assertStatus(200);
-        $this->assertDatabaseMissing('articles', ['id' => 7]);
+        $this->assertDatabaseMissing('articles', ['id' => 1]);
     }
 }

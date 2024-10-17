@@ -14,11 +14,11 @@ class CategoryTest extends TestCase
     public function test_category_creation()
     {
         $response = $this->post('/api/category', [
-            'name' => 'Cinema',
+            'name' => 'Economy',
         ]);
 
         $response->assertStatus(201);
-        $this->assertDatabaseHas('categories', ['name' => 'Cinema']);
+        $this->assertDatabaseHas('categories', ['name' => 'Economy']);
     }
 
     /**
@@ -29,7 +29,7 @@ class CategoryTest extends TestCase
         $response = $this->get('/api/category');
 
         $response->assertStatus(200);
-        $response->assertJsonCount(3);
+        $response->assertJsonCount(1);
     }
 
     /**
@@ -37,10 +37,10 @@ class CategoryTest extends TestCase
      */
     public function test_category_show()
     {
-        $response = $this->get('/api/category/5');
+        $response = $this->get('/api/category/1');
 
         $response->assertStatus(200);
-        $response->assertJson(['name' => 'Music and Arts']);
+        $response->assertJson(['name' => 'Economy']);
     }
 
     /**
@@ -49,11 +49,11 @@ class CategoryTest extends TestCase
     public function test_category_update()
     {
         $response = $this->put('/api/category/1', [
-            'name' => 'Sport',
+            'name' => 'Industry',
         ]);
 
         $response->assertStatus(201);
-        $this->assertDatabaseHas('categories', ['name' => 'Sport']);
+        $this->assertDatabaseHas('categories', ['name' => 'Industry']);
     }
 
     /**
@@ -61,10 +61,13 @@ class CategoryTest extends TestCase
      */
     public function test_category_delete()
     {
-        $response = $this->delete('/api/category/5');
+        $this->post('/api/category', [
+            'name' => 'Industry',
+        ]);
+        $response = $this->delete('/api/category/1');
 
         $response->assertStatus(200);
-        $this->assertDatabaseMissing('categories', ['id' => 5]);
-        $this->assertDatabaseMissing('articles', ['category_id' => 5]);
+        $this->assertDatabaseMissing('categories', ['id' => 1]);
+        $this->assertDatabaseMissing('articles', ['category_id' => 1]);
     }
 }
