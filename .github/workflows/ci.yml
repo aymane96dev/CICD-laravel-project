@@ -22,12 +22,13 @@ jobs:
 
       - name: config env file
         run: cp .env.example .env
-        
+
       - name: Generate application key
         run: php artisan key:generate
   
       - name: Set up database
         run: |
+          sudo apt-get install mysql-server
           sudo mysql -e 'CREATE DATABASE blog;'
   
       - name: Run migrations
