@@ -39,9 +39,7 @@ jobs:
         run: |
           sudo systemctl start mysql
           sudo systemctl status mysql
-  
-      - name: Create database 
-        run: php artisan app:create-database
+          sudo mysql --user=root --password=root
   
       - name: Run migrations
         run: php artisan migrate
