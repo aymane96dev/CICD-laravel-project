@@ -47,9 +47,14 @@ jobs:
       - name: Feature test
         run: php artisan test
 
+      - name: Install Vapor CLI
+        run: composer global require laravel/vapor-cli
+
+      - name: Add Composer to PATH
+        run: echo "::add-path::$HOME/.composer/vendor/bin"
+        
       - name: Deploy to Vapor 
         env:
           VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
         run: |
-          composer global require laravel/vapor-cli
           vapor deploy production --no-interaction
