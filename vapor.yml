@@ -1,0 +1,13 @@
+id: 66427
+name: cicd-app
+environments:
+    production:
+        memory: 1024
+        cli-memory: 512
+        database: blog
+        runtime: 'php-8.3:al2'
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+            - 'php artisan event:cache'
+            - 'php artisan migrate --force'
+            - 'php artisan test'

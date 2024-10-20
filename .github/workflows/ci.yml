@@ -35,14 +35,13 @@ jobs:
       - name: Generate application key
         run: php artisan key:generate
   
-      - name: Set up database
-        run: |
-          sudo systemctl start mysql
-          sudo systemctl status mysql
-          sudo mysql -u root -p'root' -e 'CREATE DATABASE blog;'
-  
       - name: Run migrations
         run: php artisan migrate
 
       - name: Feature test
         run: php artisan test
+
+      - name: Deploy to Vapor 
+        env:
+          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+        run: vapor deploy production --no-interaction
