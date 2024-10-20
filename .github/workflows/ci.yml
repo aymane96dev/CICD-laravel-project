@@ -49,9 +49,6 @@ jobs:
 
       - name: Install Vapor CLI
         run: composer global require laravel/vapor-cli
-
-      - name: Add Composer to PATH
-        run: echo "::add-path::$HOME/.composer/vendor/bin"
         
       - name: Deploy to Vapor 
         env:
